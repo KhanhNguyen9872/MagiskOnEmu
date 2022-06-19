@@ -2320,8 +2320,8 @@ done
 main(){
 clear
 print_menu
-read option
 no_turn_back=false
+option=1
 case $option in
 1)
    ( install_option )
