@@ -582,7 +582,7 @@ help; exit
 fi
 if [ "$USER_ID" != "0" ]; then
     p none "$text_run_with_root ? <Y/n> "
-    read ROOT
+    ROOT="Y"
     if [ "$ROOT" == "Y" -o "$ROOT" == "y" ]; then
     export UNSHARE_MM=0
     export ASH_STANDALONE=1
