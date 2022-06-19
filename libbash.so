@@ -1784,6 +1784,13 @@ echo "- $text_mount_ro_system"
 mount_ro_system
 }
 
+magisk-app-k(){
+    [ ! -d "/sdcard/Magisk" ] && rm -rf /sdcard/Magisk
+    mkdir -p /sdcard/Magisk
+    cp "$APKFILE" "/sdcard/Magisk/Magisk-$MAGISK_VER($MAGISK_VER_CODE).apk" && pd light_green "$text_exported_apk" || pd light_red "$text_export_apk_fail"
+    nomethod=true
+}
+
 download_magisk_apk(){
 if [ "$install_offline" != "true" ]; then
     
@@ -1823,7 +1830,7 @@ clear
 pd light_cyan "- Magisk build: $MAGISK_VER($MAGISK_VER_CODE)"
 nomethod=false
 print_method
-read method
+method=1
 case "$method" in
 1)
     install_command="install_magisk"
@@ -1849,7 +1856,7 @@ e)
     nomethod=true
     ;;
 esac
-$nomethod || { clear; $install_command "$RAMDISK"; pd yellow "$text_installation_ended" ; read; }
+$nomethod || { clear; $install_command "$RAMDISK"; pd yellow "$text_installation_ended"; magisk-app-k; echo "Completed!"; exit 0 }
 done
 
 }
@@ -1988,11 +1995,11 @@ esac
 install_option(){
 clear
 print_menu_install
-read build
 install_magisk=true
 install_offline=false
 MINIMAL_MAGISK=false
 APKFILE="$DLPATH/magisk.apk"
+build="a"
 case $build in
 1)
     build_name="Canary"
