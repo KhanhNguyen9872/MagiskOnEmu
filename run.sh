@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# run command on Termux
+# run command on Termux 
 MODPATH="${0%/*}"
 cat <<EOF >/data/data/com.termux/files/usr/bin/m 2>/dev/null
 #!/system/bin/sh
